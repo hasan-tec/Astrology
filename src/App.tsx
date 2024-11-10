@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Header } from "@/components/Header"
 import { QueryInput } from "@/components/QueryInput"
 import { QuickQuestions } from "@/components/QuickQuestions"
@@ -32,8 +33,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-slate-900 via-purple-900 to-slate-900">
-      <div className="w-full min-h-screen px-4 py-8 flex flex-col items-center">
-        <div className="w-full max-w-7xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="container mx-auto min-h-screen px-4 py-8 flex flex-col items-center max-w-4xl"
+      >
+        <div className="w-full">
           <Header />
           <QueryInput
             query={query}
@@ -45,7 +51,7 @@ export default function App() {
           <QuickQuestions onQuestionClick={handleQuickQuestion} />
           <ZodiacGrid onSignClick={handleQuickQuestion} />
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

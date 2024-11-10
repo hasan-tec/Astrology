@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { Scale, Compass, Fish, Gem, Heart, Star, Leaf, Skull } from "lucide-react"
 import { ZodiacButton } from "./ZodiacButton"
 
@@ -17,16 +18,37 @@ export function ZodiacGrid({ onSignClick }: ZodiacGridProps) {
     { icon: Skull, sign: "Scorpio" },
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  }
+
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-3xl mx-auto"
+    >
       {zodiacSigns.map(({ icon: Icon, sign }) => (
-        <ZodiacButton
-          key={sign}
-          icon={<Icon className="w-6 h-6" />}
-          sign={sign}
-          onClick={() => onSignClick(`Tell me about ${sign}'s characteristics and destiny.`)}
-        />
+        <motion.div key={sign} variants={itemVariants}>
+          <ZodiacButton
+            icon={<Icon className="w-6 h-6" />}
+            sign={sign}
+            onClick={() => onSignClick(`Tell me about ${sign}'s characteristics and destiny.`)}
+          />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   )
 }
