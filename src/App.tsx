@@ -7,6 +7,7 @@ import { ZodiacGrid } from "@/components/ZodiacGrid"
 import { getAstrologyResponse } from "@/lib/gemini"
 import { LandingPage } from "@/components/LandingPage"
 import { RecipeMaker } from "@/components/RecipeMaker"
+import { Button } from "@/components/ui/button"
 import "./App.css"
 
 export default function App() {
