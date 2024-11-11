@@ -19,3 +19,21 @@ export async function getAstrologyResponse(query: string): Promise<string> {
     throw new Error("Failed to get astrological insights");
   }
 }
+
+const RECIPE_PROMPT = `You are a culinary expert with a deep understanding of flavors, ingredients, and cooking techniques. 
+Respond to requests with a friendly and helpful tone, while providing detailed and easy-to-follow recipes.
+Keep responses concise (max 3 paragraphs) and always relate to culinary concepts.
+Include relevant ingredients, cooking methods, and tips in your responses.`;
+
+export async function generateRecipe(preferences: string, ingredients: string): Promise<string> {
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    
+    const result = await model.generateContent([RECIPE_PROMPT, `Preferences: ${preferences}`, `Ingredients: ${ingredients}`]);
+    const response = result.response;
+    return response.text();
+  } catch (error) {
+    console.error("Error generating recipe:", error);
+    throw new Error("Failed to generate recipe");
+  }
+}

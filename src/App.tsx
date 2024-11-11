@@ -6,6 +6,7 @@ import { QuickQuestions } from "@/components/QuickQuestions"
 import { ZodiacGrid } from "@/components/ZodiacGrid"
 import { getAstrologyResponse } from "@/lib/gemini"
 import { LandingPage } from "@/components/LandingPage"
+import { RecipeMaker } from "@/components/RecipeMaker"
 import "./App.css"
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
   const [response, setResponse] = useState("")
   const [loading, setLoading] = useState(false)
   const [showLandingPage, setShowLandingPage] = useState(true)
+  const [showRecipeMaker, setShowRecipeMaker] = useState(false)
 
   const handleSubmit = async () => {
     if (!query.trim()) return
@@ -37,10 +39,16 @@ export default function App() {
     setShowLandingPage(false)
   }
 
+  const handleNavigateToRecipeMaker = () => {
+    setShowRecipeMaker(true)
+  }
+
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-slate-900 via-purple-900 to-slate-900">
       {showLandingPage ? (
         <LandingPage onNavigate={handleNavigateToApp} />
+      ) : showRecipeMaker ? (
+        <RecipeMaker />
       ) : (
         <motion.div 
           initial={{ opacity: 0 }}
@@ -59,6 +67,9 @@ export default function App() {
             />
             <QuickQuestions onQuestionClick={handleQuickQuestion} />
             <ZodiacGrid onSignClick={handleQuickQuestion} />
+            <Button onClick={handleNavigateToRecipeMaker} className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg mt-4">
+              Go to Recipe Maker
+            </Button>
           </div>
         </motion.div>
       )}
