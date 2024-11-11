@@ -85,34 +85,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-.recipe-maker {
-  background-color: var(--card);
-  color: var(--card-foreground);
-  padding: 1rem;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.recipe-maker h2 {
-  color: var(--primary);
-}
-
-.recipe-maker .input {
-  background-color: var(--input);
-  border: 1px solid var(--border);
-  padding: 0.5rem;
-  border-radius: var(--radius);
-}
-
-.recipe-maker .button {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius);
-  transition: background-color 0.3s;
-}
-
-.recipe-maker .button:hover {
-  background-color: var(--primary-hover);
-}
